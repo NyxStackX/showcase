@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="800" height="500">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#1c1418"/>
+      <stop offset="55%" stop-color="#241a1e"/>
+      <stop offset="100%" stop-color="#0e0a0c"/>
+    </linearGradient>
+    <linearGradient id="dancer" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#e8b4b8"/>
+      <stop offset="100%" stop-color="#d4a574"/>
+    </linearGradient>
+    <radialGradient id="glow" cx="50%" cy="45%" r="55%">
+      <stop offset="0%" stop-color="rgba(232,180,184,0.28)"/>
+      <stop offset="100%" stop-color="rgba(232,180,184,0)"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <rect width="800" height="500" fill="url(#glow)"/>
+
+  <!-- ribbons / mouvement -->
+  <g fill="none" stroke-linecap="round" opacity="0.5">
+    <path d="M120 380 C 260 300, 300 180, 420 150" stroke="url(#dancer)" stroke-width="3"/>
+    <path d="M150 410 C 300 340, 360 220, 500 190" stroke="url(#dancer)" stroke-width="2" opacity="0.6"/>
+    <path d="M540 360 C 620 300, 660 220, 700 180" stroke="url(#dancer)" stroke-width="2" opacity="0.5"/>
+  </g>
+
+  <!-- danseuse stylisée -->
+  <g transform="translate(400 250)" fill="url(#dancer)">
+    <!-- tete -->
+    <circle cx="6" cy="-150" r="22"/>
+    <!-- corps incline -->
+    <path d="M6 -128
+             C 28 -108, 40 -78, 30 -40
+             C 24 -14, 36 18, 64 40
+             C 78 52, 92 70, 96 92
+             L 78 100
+             C 66 78, 50 64, 34 56
+             C 8 44, -10 18, -8 -16
+             C -6 -50, -14 -96, 6 -128 Z"/>
+    <!-- bras leve -->
+    <path d="M16 -120 C 56 -140, 96 -150, 132 -176 L 140 -160
+             C 104 -132, 64 -118, 26 -104 Z"/>
+    <!-- bras tendu -->
+    <path d="M-2 -86 C -44 -78, -86 -88, -120 -110 L -124 -94
+             C -88 -70, -44 -58, -4 -64 Z"/>
+    <!-- jambe portante -->
+    <path d="M40 36 C 56 78, 70 122, 70 168 L 50 168
+             C 44 124, 32 84, 18 50 Z"/>
+    <!-- jambe levee -->
+    <path d="M22 40 C -16 70, -58 92, -104 100 L -108 84
+             C -66 70, -28 48, 6 22 Z"/>
+  </g>
+
+  <!-- particules -->
+  <g fill="#e8b4b8">
+    <circle cx="180" cy="140" r="3" opacity="0.7"/>
+    <circle cx="630" cy="120" r="2.5" opacity="0.6"/>
+    <circle cx="690" cy="360" r="3" opacity="0.5"/>
+    <circle cx="120" cy="300" r="2" opacity="0.6"/>
+    <circle cx="560" cy="420" r="2.5" opacity="0.5"/>
+  </g>
+</svg>
