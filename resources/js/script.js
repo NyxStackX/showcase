@@ -110,145 +110,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // Initialize elegant custom cursor
     initCustomCursor();
-
-    // Initialize project detail modal (clic sur une carte projet)
-    initProjectModal();
 });
-
-// ============================================
-// MODALE DÉTAILS PROJET
-// ============================================
-function initProjectModal() {
-    const cards = document.querySelectorAll('.project-magazine-card');
-    if (!cards.length) return;
-
-    // Crée la modale une seule fois
-    const overlay = document.createElement('div');
-    overlay.className = 'project-modal-overlay';
-    overlay.innerHTML = `
-        <div class="project-modal" role="dialog" aria-modal="true">
-            <div class="project-modal-header">
-                <button class="project-modal-close" aria-label="Fermer">&times;</button>
-                <span class="project-modal-category"></span>
-                <div class="project-modal-media"></div>
-            </div>
-            <div class="project-modal-body">
-                <h3></h3>
-                <div class="project-modal-meta"></div>
-                <p></p>
-                <ul class="project-modal-features"></ul>
-                <div class="project-modal-tech"></div>
-                <div class="project-modal-links project-links"></div>
-            </div>
-        </div>`;
-    document.body.appendChild(overlay);
-
-    const modal = overlay.querySelector('.project-modal');
-    const closeBtn = overlay.querySelector('.project-modal-close');
-
-    function openModal(card) {
-        const img = card.querySelector('.project-image-wrapper img');
-        const category = card.querySelector('.project-category');
-        const title = card.querySelector('.project-content h3');
-        const shortDesc = card.querySelector('.project-description');
-        const techSpans = card.querySelectorAll('.project-tech span');
-        const links = card.querySelectorAll('.project-links .project-link');
-
-        const year = card.getAttribute('data-year');
-        const role = card.getAttribute('data-role');
-        const experience = card.getAttribute('data-experience');
-        const video = card.getAttribute('data-video');
-        const longDesc = card.getAttribute('data-long');
-        const featuresAttr = card.getAttribute('data-features');
-
-        // Média : vidéo si disponible, sinon image
-        const media = overlay.querySelector('.project-modal-media');
-        media.innerHTML = '';
-        if (video) {
-            const vid = document.createElement('video');
-            vid.src = video;
-            vid.controls = true;
-            vid.playsInline = true;
-            vid.preload = 'metadata';
-            if (img) vid.poster = img.getAttribute('src');
-            media.appendChild(vid);
-        } else {
-            const modalImg = document.createElement('img');
-            modalImg.src = img ? img.getAttribute('src') : '';
-            modalImg.alt = title ? title.textContent : '';
-            media.appendChild(modalImg);
-        }
-
-        // Catégorie + titre
-        overlay.querySelector('.project-modal-category').textContent = category ? category.textContent : '';
-        overlay.querySelector('.project-modal h3').textContent = title ? title.textContent : '';
-
-        // Méta (année + rôle + expérience)
-        const meta = overlay.querySelector('.project-modal-meta');
-        meta.innerHTML = '';
-        if (experience) meta.insertAdjacentHTML('beforeend', `<span><i class="bx bx-medal"></i>${experience}</span>`);
-        if (year) meta.insertAdjacentHTML('beforeend', `<span><i class="bx bx-calendar"></i>${year}</span>`);
-        if (role) meta.insertAdjacentHTML('beforeend', `<span><i class="bx bx-user"></i>${role}</span>`);
-
-        // Description longue (sinon description courte)
-        overlay.querySelector('.project-modal-body > p').textContent =
-            longDesc || (shortDesc ? shortDesc.textContent.trim() : '');
-
-        // Fonctionnalités clés
-        const featuresList = overlay.querySelector('.project-modal-features');
-        featuresList.innerHTML = '';
-        if (featuresAttr) {
-            featuresAttr.split('|').forEach(f => {
-                featuresList.insertAdjacentHTML('beforeend',
-                    `<li><i class="bx bx-check-circle"></i>${f.trim()}</li>`);
-            });
-        }
-
-        // Technologies
-        const tech = overlay.querySelector('.project-modal-tech');
-        tech.innerHTML = '';
-        techSpans.forEach(s => {
-            tech.insertAdjacentHTML('beforeend', `<span>${s.textContent}</span>`);
-        });
-
-        // Liens (clonés depuis la carte)
-        const linksContainer = overlay.querySelector('.project-modal-links');
-        linksContainer.innerHTML = '';
-        links.forEach(l => {
-            const href = l.getAttribute('href');
-            // On ignore les liens "#" non renseignés et le lien vidéo (déjà affiché)
-            if (href && href !== '#' && href !== video) {
-                linksContainer.appendChild(l.cloneNode(true));
-            }
-        });
-
-        overlay.classList.add('open');
-        document.body.style.overflow = 'hidden';
-    }
-
-    function closeModal() {
-        const playing = overlay.querySelector('.project-modal-media video');
-        if (playing) playing.pause();
-        overlay.classList.remove('open');
-        document.body.style.overflow = '';
-    }
-
-    cards.forEach(card => {
-        card.addEventListener('click', function(e) {
-            // Laisse les vrais liens fonctionner normalement
-            if (e.target.closest('a')) return;
-            openModal(card);
-        });
-    });
-
-    closeBtn.addEventListener('click', closeModal);
-    overlay.addEventListener('click', function(e) {
-        if (e.target === overlay) closeModal();
-    });
-    document.addEventListener('keydown', function(e) {
-        if (e.key === 'Escape' && overlay.classList.contains('open')) closeModal();
-    });
-}
 
 // Keep active nav link in sync with current page
 function setActiveNavLink() {
@@ -469,3 +331,48 @@ function initCustomCursor() {
         cursor.style.opacity = '1';
     });
 }
+
+// ===== MODALE PROJETS =====
+(function () {
+    const modal = document.getElementById('projModal');
+    if (!modal) return;
+    const cards = document.querySelectorAll('.mcard');
+    const img = document.getElementById('pmImg');
+    const cat = document.getElementById('pmCat');
+    const title = document.getElementById('pmTitle');
+    const desc = document.getElementById('pmDesc');
+    const tech = document.getElementById('pmTech');
+    const demo = document.getElementById('pmDemo');
+    const code = document.getElementById('pmCode');
+
+    function open(card) {
+        img.src = card.dataset.img;
+        img.alt = card.dataset.title;
+        cat.textContent = card.dataset.cat;
+        title.textContent = card.dataset.title;
+        desc.textContent = card.dataset.desc;
+        tech.innerHTML = card.dataset.tech.split(',')
+            .map(t => '<span>' + t.trim() + '</span>').join('');
+        const d = card.dataset.demo;
+        if (d && d !== '#') { demo.href = d; demo.style.display = ''; }
+        else { demo.style.display = 'none'; }
+        code.href = card.dataset.code;
+        modal.classList.add('open');
+        modal.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+    function close() {
+        modal.classList.remove('open');
+        modal.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    cards.forEach(card => {
+        card.addEventListener('click', () => open(card));
+        card.addEventListener('keydown', e => {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); open(card); }
+        });
+    });
+    modal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', close));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();

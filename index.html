@@ -10,6 +10,10 @@
         href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
         rel="stylesheet"
     />
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..900&family=Archivo:wght@300..800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="resources/editorial-bold.css" />
 </head>
 <body>
 
@@ -29,66 +33,72 @@
         <a href="resources/contact.html">Contact</a>
     </nav>
 
-
     <button class="theme-toggle" id="theme-toggle" aria-label="Changer de thème">
         <i class="bx bx-moon"></i>
     </button>
 
     <a class="gradient-btn" href="https://mail.google.com/mail/?view=cm&to=alebapaulina89@gmail.com&su=Hello&body=Bonjour%20Paulina,%0A%0AJe%20veux%20vous%20contacter%20pour..." target="_blank">Me Contacter</a>
-
 </header>
 
-<section class="home magazine-layout editorial-home" id="home">
-    <div class="editorial-blob blob-left"></div>
-    <div class="editorial-blob blob-right"></div>
-
-    <div class="editorial-grid">
-        <div class="editorial-main magazine-main">
-            <div class="magazine-badge">PORTFOLIO Lina</div>
-            <h1 class="magazine-title">
-                <span class="highlight">PAULINA</span>
-                <br>
-                <span class="subtitle">ALEBA</span>
+<!-- ================= HERO ASYMÉTRIQUE ================= -->
+<section class="bold-hero" id="home">
+    <span class="bold-ghost-num">01</span>
+    <div class="bold-hero-grid">
+        <div class="bold-hero-type">
+            <span class="bold-kicker">Portfolio — Étudiante en informatique</span>
+            <h1 class="bold-title">
+                <span class="line l1">Paulina</span>
+                <span class="line l2"><span class="ital">Aleba</span></span>
             </h1>
-            <div class="magazine-divider"></div>
-
-            <p class="magazine-description">
-                Passionnée par la technologie, la création et le monde numérique, je transforme mes idées en projets concrets.
-                J’aime créer des expériences visuelles uniques et connecter les gens grâce au digital.
+            <p class="bold-role">Développeuse en formation · Design &amp; Création numérique</p>
+            <p class="bold-intro">
+                Passionnée par la technologie, la création et le monde numérique,
+                je transforme mes idées en projets concrets.
             </p>
-
-            <div class="signature-highlights">
-                <div class="highlight-pill">
-                    <span class="highlight-title">Design sensible</span>
-                    <span class="highlight-sub">Des interfaces pensées pour toucher et marquer.</span>
-                </div>
-                <div class="highlight-pill">
-                    <span class="highlight-title">Expériences web</span>
-                    <span class="highlight-sub">Des projets élégants, fluides et mémorables.</span>
-                </div>
-                <div class="highlight-pill">
-                    <span class="highlight-title">Énergie créative</span>
-                    <span class="highlight-sub">Une vision moderne avec une vraie personnalité.</span>
-                </div>
-            </div>
-
-            <div class="magazine-cta">
-                <a href="resources/projects.html" class="magazine-btn primary">Mes Projets</a>
-                <a href="resources/contact.html" class="magazine-btn secondary">Contact</a>
+            <div class="bold-cta">
+                <a href="resources/projects.html" class="bold-btn">Voir mes projets <span>→</span></a>
+                <a href="resources/contact.html" class="bold-btn ghost">Me contacter</a>
             </div>
         </div>
 
-        <aside class="editorial-side">
-            <div class="editorial-photo-wrap">
+        <div class="bold-hero-photo">
+            <div class="photo-frame">
                 <img src="resources/images/Photo_Paulina.jpeg" alt="Portrait de Paulina Aleba">
-                <div class="photo-shine"></div>
             </div>
+            <span class="photo-tag">Étudiante · Epitech B1 · Bordeaux</span>
+        </div>
+    </div>
 
-            <div class="editorial-note">
-                <i class="bx bx-quote-left"></i>
-                <p>Créer une présence digitale qui touche, inspire et connecte.</p>
-            </div>
-        </aside>
+    <div class="bold-marquee">
+        <div class="marquee-track">
+            <span>Design</span><span>•</span><span>Frontend</span><span>•</span><span>Docker</span><span>•</span><span>Créativité</span><span>•</span><span>Data</span><span>•</span><span>UI / UX</span><span>•</span>
+            <span>Design</span><span>•</span><span>Frontend</span><span>•</span><span>Docker</span><span>•</span><span>Créativité</span><span>•</span><span>Data</span><span>•</span><span>UI / UX</span><span>•</span>
+        </div>
+    </div>
+</section>
+
+<section class="bold-pillars" id="approche">
+    <span class="bold-ghost-num right">02</span>
+    <div class="pillars-head">
+        <span class="bold-kicker">Mon approche</span>
+        <h2 class="bold-h2">Ce qui me <span class="ital">définit</span></h2>
+    </div>
+    <div class="pillars-grid">
+        <article class="pillar offset-down">
+            <span class="pillar-num">/01</span>
+            <h3>Design sensible</h3>
+            <p>Des interfaces pensées pour toucher et marquer durablement.</p>
+        </article>
+        <article class="pillar">
+            <span class="pillar-num">/02</span>
+            <h3>Expériences web</h3>
+            <p>Des projets élégants, fluides et mémorables, du concept au déploiement.</p>
+        </article>
+        <article class="pillar offset-down">
+            <span class="pillar-num">/03</span>
+            <h3>Énergie créative</h3>
+            <p>Une vision moderne portée par une vraie personnalité visuelle.</p>
+        </article>
     </div>
 </section>
 
@@ -99,7 +109,6 @@
                 <h3>Paulina Aleba</h3>
                 <p>Étudiante en informatique - Epitech B1</p>
                 <div class="footer-quote">
-
                     "Créer des expériences numériques qui comptent"
                 </div>
             </div>
@@ -115,22 +124,13 @@
                 </ul>
             </div>
 
-
             <div class="footer-social">
                 <h4>Suivez-moi</h4>
                 <div class="social-icons">
-                    <a href="https://github.com/NyxStackX" class="social-link">
-                        <i class="bx bxl-github"></i>
-                    </a>
-                    <a href="https://snapchat.com/t/KpWpgwNT" class="social-link">
-                        <i class="bx bxl-snapchat"></i>
-                    </a>
-                    <a href="https://www.instagram.com/li_naalb?igsh=ZHpsbHFmYWc4bWs%3D&utm_source=qr" class="social-link">
-                        <i class="bx bxl-instagram-alt"></i>
-                    </a>
-                    <a href="https://www.linkedin.com/in/paulina-aleba-841705391/" class="social-link">
-                        <i class="bx bxl-linkedin"></i>
-                    </a>
+                    <a href="https://github.com/NyxStackX" class="social-link"><i class="bx bxl-github"></i></a>
+                    <a href="https://snapchat.com/t/KpWpgwNT" class="social-link"><i class="bx bxl-snapchat"></i></a>
+                    <a href="https://www.instagram.com/li_naalb?igsh=ZHpsbHFmYWc4bWs%3D&utm_source=qr" class="social-link"><i class="bx bxl-instagram-alt"></i></a>
+                    <a href="https://www.linkedin.com/in/paulina-aleba-841705391/" class="social-link"><i class="bx bxl-linkedin"></i></a>
                 </div>
             </div>
         </div>
@@ -138,17 +138,13 @@
         <div class="footer-bottom">
             <div class="footer-line"></div>
             <div class="copyright-content">
-                <p class="copyright">
-                    © 2026 Paulina Aleba. Tous droits réservés.
-                </p>
+                <p class="copyright">© 2026 Paulina Aleba. Tous droits réservés.</p>
                 <div class="footer-actions">
                     <a href="https://mail.google.com/mail/?view=cm&to=alebapaulina89@gmail.com" class="footer-link">
-                        <i class="bx bx-envelope"></i>
-                        M'envoyer un email
+                        <i class="bx bx-envelope"></i> M'envoyer un email
                     </a>
                     <a href="index.html" class="footer-link back-to-top">
-                        <i class="bx bx-up-arrow-alt"></i>
-                        Retour en haut
+                        <i class="bx bx-up-arrow-alt"></i> Retour en haut
                     </a>
                 </div>
             </div>
@@ -159,4 +155,3 @@
     <script src="resources/js/script.js"></script>
 </body>
 </html>
-
