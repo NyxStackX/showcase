@@ -1,2 +1,4 @@
-html/assets/*.pdf
-html/images/
+resources/assets/*.pdf.bak
+.DS_Store
+Thumbs.db
+*.log
