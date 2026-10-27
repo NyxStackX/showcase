@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520">
+<rect width="1200" height="520" fill="#1a1512"/>
+<g fill="none" stroke="#d97a5a" stroke-opacity=".35" stroke-width="2">
+<circle cx="960" cy="250" r="190"/><circle cx="960" cy="250" r="120"/><circle cx="960" cy="250" r="50"/>
+<path d="M770 250h380M960 60v380"/></g>
+<g fill="#f1e6d6"><circle cx="1080" cy="130" r="9"/><circle cx="850" cy="370" r="7"/><circle cx="1040" cy="400" r="6"/><circle cx="890" cy="150" r="5"/></g>
+<text x="80" y="300" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="104" fill="#f1e6d6">Vulgar<tspan font-style="italic" fill="#d97a5a">IA</tspan></text><text x="84" y="352" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="26" letter-spacing="2" fill="#d9b48f">La science, expliquée simplement</text>
+</svg>

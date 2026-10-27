@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 520">
+<rect width="1200" height="520" fill="#1a1512"/>
+<g opacity=".5"><path d="M700 470h460M700 370h460M700 270h460M700 170h460" stroke="#6d5b50" stroke-width="1"/></g>
+<polyline points="700,430 708,421 716,411 724,399 732,385 740,368 748,350 756,333 764,316 772,302 780,291 788,282 796,276 804,272 812,269 820,265 828,261 836,255 844,248 852,240 860,231 868,223 876,215 884,208 892,203 900,199 908,197 916,195 924,194 932,193 940,191 948,188 956,185 964,181 972,176 980,172 988,168 996,165 1004,163 1012,162 1020,161 1028,160 1036,160 1044,159 1052,158 1060,157 1068,155 1076,153 1084,151 1092,149 1100,147 1108,146 1116,145 1124,144 1132,144 1140,144 1148,144 1156,144 1164,143 1172,143 1180,142" fill="none" stroke="#d97a5a" stroke-width="3" stroke-linecap="round"/>
+<polyline points="740,120 754,120 768,121 782,123 796,125 810,128 824,132 838,137 852,142 866,148 880,154 894,161 908,169 922,177 936,187 950,196 964,207 978,218 992,230 1006,243 1020,256 1034,270 1048,285" fill="none" stroke="#d9b48f" stroke-width="2" stroke-dasharray="7 7" opacity=".75"/>
+<g transform="translate(1055,300)">
+  <path d="M0,-26 L17,8 L-17,8 Z" fill="#f1e6d6"/>
+  <path d="M-17,8 l-11,17 M17,8 l11,17" stroke="#f1e6d6" stroke-width="4" stroke-linecap="round"/>
+  <path d="M-8,14 l8,22 l8,-22" fill="#d97a5a" opacity=".85"/>
+</g>
+<g fill="#6d5b50"><circle cx="1140" cy="470" r="3"/><circle cx="760" cy="470" r="3"/></g>
+<text x="80" y="300" font-family="Fraunces, Georgia, 'Times New Roman', serif" font-size="104" fill="#f1e6d6">Start <tspan font-style="italic" fill="#d97a5a">Trek</tspan></text><text x="84" y="352" font-family="Archivo, Helvetica, Arial, sans-serif" font-size="26" letter-spacing="2" fill="#d9b48f">Apprentissage par renforcement</text>
+</svg>
