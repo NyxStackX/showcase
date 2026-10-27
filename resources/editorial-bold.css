@@ -1056,3 +1056,116 @@ section.bold-inner:nth-of-type(even) { background: var(--second-bg-color); }
 .project-tech span, .service-tags span {
     -webkit-text-fill-color: var(--text-color) !important;
 }
+
+/* ---------- PARCOURS (à propos) ---------- */
+.parcours-section {
+    padding: 4rem 7vw 6rem;
+    background: var(--bg-color);
+}
+
+.parcours-list {
+    list-style: none;
+    margin: 3rem 0 0;
+    padding: 0;
+    max-width: 62rem;
+}
+
+.parcours-item {
+    display: grid;
+    grid-template-columns: minmax(8rem, 12rem) 1fr;
+    gap: 2rem;
+    padding: 2rem 0;
+    border-top: 1px solid var(--border-color);
+}
+
+.parcours-item:last-child {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.parcours-date {
+    font-family: var(--eb-body);
+    font-size: 0.82rem;
+    letter-spacing: 0.08em;
+    color: var(--accent-color);
+    padding-top: 0.35rem;
+}
+
+.parcours-body h3 {
+    font-family: var(--eb-display);
+    font-weight: 600;
+    font-size: 1.35rem;
+    line-height: 1.25;
+    margin: 0 0 0.6rem;
+    color: var(--text-color);
+}
+
+.parcours-body p {
+    font-family: var(--eb-body);
+    font-size: 0.97rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    margin: 0;
+    max-width: 52ch;
+}
+
+.parcours-body strong {
+    color: var(--main-color);
+    font-weight: 600;
+}
+
+@media (max-width: 760px) {
+    .parcours-section { padding: 3rem 6vw 4rem; }
+    .parcours-item {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+    }
+    .parcours-date { padding-top: 0; }
+}
+
+/* ---------- BADGE "EN COURS" SUR LES CARTES PROJET ---------- */
+.project-status {
+    display: inline-block;
+    margin-left: 0.7rem;
+    padding: 0.2rem 0.6rem;
+    border: 1px solid var(--main-color);
+    border-radius: 999px;
+    font-family: var(--eb-body);
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    color: var(--main-color);
+    vertical-align: middle;
+    white-space: nowrap;
+}
+
+/* ---------- NAVIGATION EN PAGE UNIQUE ---------- */
+.page { display: none; }
+
+.page.is-active {
+    display: block;
+    animation: pageIn 0.45s cubic-bezier(0.22, 0.61, 0.36, 1) both;
+}
+
+@keyframes pageIn {
+    from { opacity: 0; transform: translateY(14px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page.is-active { animation: none; }
+}
+
+/* ---------- RETOUR DU FORMULAIRE DE CONTACT ---------- */
+.form-feedback {
+    margin-top: 1.2rem;
+    padding: 0.9rem 1.1rem;
+    border-left: 3px solid var(--main-color);
+    background: var(--second-bg-color);
+    font-family: var(--eb-body);
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: var(--text-color);
+}
+
+.form-feedback[hidden] { display: none; }
+.form-feedback.is-error { border-left-color: #c0564b; }

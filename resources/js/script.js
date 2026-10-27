@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Smooth scrolling for anchor links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    document.querySelectorAll('a[href^="#"]:not([href="#"])').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             e.preventDefault();
             const target = document.querySelector(this.getAttribute('href'));
@@ -103,101 +103,11 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 
     // Reliable active nav link based on current page
-    setActiveNavLink();
 
-    // Page Transition Functionality
-    initPageTransitions();
     
     // Initialize elegant custom cursor
     initCustomCursor();
 });
-
-// Keep active nav link in sync with current page
-function setActiveNavLink() {
-    const currentPath = window.location.pathname.split('/').pop() || 'index.html';
-    const navLinks = document.querySelectorAll('.navbar a');
-
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        const href = link.getAttribute('href');
-        if (href === currentPath || (currentPath === '' && href === 'index.html')) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// Page Transition System
-function initPageTransitions() {
-    // Create transition overlay if it doesn't exist
-    let transitionOverlay = document.querySelector('.page-transition');
-    if (!transitionOverlay) {
-        transitionOverlay = document.createElement('div');
-        transitionOverlay.className = 'page-transition';
-        document.body.appendChild(transitionOverlay);
-    }
-
-    // Add page-content class to main content for entrance animation
-    const mainContent = document.querySelector('section') || document.querySelector('main');
-    if (mainContent && !mainContent.classList.contains('page-content')) {
-        mainContent.classList.add('page-content');
-    }
-
-    // Handle internal link clicks for transition
-    const internalLinks = document.querySelectorAll('a[href]:not([href^="#"]):not([href^="http"]):not([href^="mailto"]):not([href^="tel"])');
-    
-    internalLinks.forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            
-            // Skip if it's the current page
-            if (href === window.location.pathname.split('/').pop() || 
-                (href === 'index.html' && window.location.pathname.endsWith('/'))) {
-                return;
-            }
-
-            e.preventDefault();
-            
-            // Start transition
-            document.body.classList.add('transitioning');
-            transitionOverlay.classList.add('slide-up');
-            
-            // Navigate after animation
-            setTimeout(() => {
-                window.location.href = href;
-            }, 600);
-        });
-    });
-
-    // Handle page entrance animation
-    window.addEventListener('pageshow', function(e) {
-        // Remove transitioning class
-        document.body.classList.remove('transitioning');
-        
-        // If coming from cache (back button), remove animation classes
-        if (e.persisted) {
-            transitionOverlay.classList.remove('slide-up', 'slide-down', 'active');
-            return;
-        }
-
-        // Play entrance animation
-        if (transitionOverlay.classList.contains('slide-up')) {
-            transitionOverlay.classList.remove('slide-up');
-            transitionOverlay.classList.add('slide-down');
-            
-            setTimeout(() => {
-                transitionOverlay.classList.remove('slide-down', 'active');
-            }, 600);
-        }
-    });
-
-    // Handle initial page load
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-        transitionOverlay.classList.add('slide-down');
-        setTimeout(() => {
-            transitionOverlay.classList.remove('slide-down', 'active');
-        }, 600);
-    }
-}
 
 // Curseur Luxe Premium - Multi-couches avec effets avancés
 function initCustomCursor() {
@@ -375,4 +285,90 @@ function initCustomCursor() {
     });
     modal.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', close));
     document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
+
+// ===== NAVIGATION EN PAGE UNIQUE =====
+// Le site tient dans index.html : changer de page affiche une autre section,
+// sans jamais toucher a l'URL. La barre d'adresse reste sur le nom de domaine.
+(function () {
+    const pages = document.querySelectorAll('.page');
+    const liens = document.querySelectorAll('[data-page]');
+    if (!pages.length) return;
+
+    const titres = {
+        home: 'Paulina Aleba - Étudiante Data & IA',
+        about: 'À propos - Paulina Aleba',
+        expertises: 'Expertises - Paulina Aleba',
+        projects: 'Projets - Paulina Aleba',
+        competencies: 'Compétences - Paulina Aleba',
+        contact: 'Contact - Paulina Aleba'
+    };
+
+    function afficher(id, remonter) {
+        const cible = document.getElementById('page-' + id);
+        if (!cible) return;
+
+        pages.forEach(p => p.classList.remove('is-active'));
+        cible.classList.add('is-active');
+
+        document.querySelectorAll('.navbar [data-page]').forEach(a => {
+            a.classList.toggle('active', a.dataset.page === id);
+        });
+
+        if (titres[id]) document.title = titres[id];
+        if (remonter) window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    liens.forEach(lien => {
+        lien.addEventListener('click', function (e) {
+            e.preventDefault();
+            afficher(this.dataset.page, true);
+        });
+    });
+
+    afficher('home', false);
+})();
+
+// ===== FORMULAIRE DE CONTACT SANS QUITTER LA PAGE =====
+(function () {
+    const form = document.querySelector('.contact-form form');
+    if (!form) return;
+
+    const retour = document.createElement('p');
+    retour.className = 'form-feedback';
+    retour.setAttribute('role', 'status');
+    retour.hidden = true;
+    form.appendChild(retour);
+
+    const bouton = form.querySelector('button[type="submit"]');
+    const texteBouton = bouton ? bouton.innerHTML : '';
+
+    form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        retour.hidden = true;
+        retour.classList.remove('is-error');
+        if (bouton) { bouton.disabled = true; bouton.textContent = 'Envoi en cours...'; }
+
+        try {
+            const reponse = await fetch(form.action, {
+                method: 'POST',
+                body: new FormData(form),
+                headers: { Accept: 'application/json' }
+            });
+
+            if (reponse.ok) {
+                form.reset();
+                retour.textContent = 'Message envoyé. Je vous réponds rapidement.';
+            } else {
+                retour.textContent = "L'envoi a échoué. Écrivez-moi directement à alebapaulina89@gmail.com.";
+                retour.classList.add('is-error');
+            }
+        } catch (err) {
+            retour.textContent = "L'envoi a échoué. Écrivez-moi directement à alebapaulina89@gmail.com.";
+            retour.classList.add('is-error');
+        }
+
+        retour.hidden = false;
+        if (bouton) { bouton.disabled = false; bouton.innerHTML = texteBouton; }
+    });
 })();
