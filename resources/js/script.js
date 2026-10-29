@@ -1,17 +1,17 @@
 // Theme Toggle Functionality
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', function () {
     console.log('Page loaded, initializing theme toggle...');
-    
+
     const themeToggle = document.getElementById('theme-toggle');
-    
+
     if (!themeToggle) {
         console.error('Theme toggle button not found!');
         return;
     }
-    
+
     const html = document.documentElement;
     const icon = themeToggle.querySelector('i');
-    
+
     if (!icon) {
         console.error('Icon not found in theme toggle!');
         return;
@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Check for saved theme preference or default to dark mode
     const currentTheme = localStorage.getItem('theme') || 'dark';
     console.log('Current theme:', currentTheme);
-    
+
     if (currentTheme === 'light') {
         html.classList.add('light-mode');
         icon.className = 'bx bx-sun';
@@ -30,7 +30,7 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Toggle theme on button click
-    themeToggle.addEventListener('click', function() {
+    themeToggle.addEventListener('click', function () {
         if (html.classList.contains('light-mode')) {
             // Switch to dark mode
             html.classList.remove('light-mode');
@@ -42,7 +42,7 @@ document.addEventListener('DOMContentLoaded', function() {
             icon.className = 'bx bx-sun';
             localStorage.setItem('theme', 'light');
         }
-        
+
         // Force a repaint
         void html.offsetWidth;
     });
@@ -52,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const navbar = document.querySelector('.navbar');
 
     if (menuIcon && navbar) {
-        menuIcon.addEventListener('click', function() {
+        menuIcon.addEventListener('click', function () {
             navbar.classList.toggle('active');
         });
     }
@@ -61,13 +61,13 @@ document.addEventListener('DOMContentLoaded', function() {
     const navLinks = document.querySelectorAll('.navbar a');
     if (navbar) {
         navLinks.forEach(link => {
-            link.addEventListener('click', function() {
+            link.addEventListener('click', function () {
                 navbar.classList.remove('active');
             });
         });
 
         // Close menu when clicking outside
-        document.addEventListener('click', function(e) {
+        document.addEventListener('click', function (e) {
             const clickedInsideMenu = navbar.contains(e.target);
             const clickedMenuIcon = menuIcon && menuIcon.contains(e.target);
 
@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Back to top functionality
     const backToTopBtn = document.querySelector('.back-to-top');
     if (backToTopBtn) {
-        backToTopBtn.addEventListener('click', function(e) {
+        backToTopBtn.addEventListener('click', function (e) {
             e.preventDefault();
             window.scrollTo({
                 top: 0,
@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Reliable active nav link based on current page
 
-    
+
     // Initialize elegant custom cursor
     initCustomCursor();
 });
@@ -113,16 +113,16 @@ document.addEventListener('DOMContentLoaded', function() {
 function initCustomCursor() {
     // Only on non-touch devices
     if (window.matchMedia('(pointer: coarse)').matches) return;
-    
+
     // Create main cursor element
     const cursor = document.createElement('div');
     cursor.className = 'cursor-luxe';
     document.body.appendChild(cursor);
-    
+
     // Create trail particles array
     const trails = [];
     const trailCount = 5;
-    
+
     for (let i = 0; i < trailCount; i++) {
         const trail = document.createElement('div');
         trail.className = 'cursor-trail';
@@ -135,63 +135,63 @@ function initCustomCursor() {
             y: 0
         });
     }
-    
+
     let mouseX = 0, mouseY = 0;
     let cursorX = 0, cursorY = 0;
     let isMoving = false;
     let mouseTimeout = null;
-    
+
     // Smooth follow animation with trails
     function animate() {
-        
+
         // Smooth interpolation for main cursor
         cursorX += (mouseX - cursorX) * 0.15;
         cursorY += (mouseY - cursorY) * 0.15;
-        
+
         cursor.style.left = cursorX + 'px';
         cursor.style.top = cursorY + 'px';
-        
+
         // Update trails with staggered delay
         trails.forEach((trail, index) => {
             trail.x += (cursorX - trail.x) * (0.1 - index * 0.015);
             trail.y += (cursorY - trail.y) * (0.1 - index * 0.015);
-            
+
             trail.element.style.left = trail.x + 'px';
             trail.element.style.top = trail.y + 'px';
-            
+
             // Fade trails based on distance from cursor
             const distance = Math.sqrt(
-                Math.pow(cursorX - trail.x, 2) + 
+                Math.pow(cursorX - trail.x, 2) +
                 Math.pow(cursorY - trail.y, 2)
             );
             const opacity = Math.max(0, 0.4 - distance * 0.005);
             trail.element.style.opacity = isMoving ? opacity : 0;
         });
-        
+
         requestAnimationFrame(animate);
     }
-    
+
     // Start animation
     setTimeout(() => {
         cursor.classList.add('visible');
         animate();
     }, 100);
-    
+
     // Track mouse movement on entire document
     document.addEventListener('mousemove', (e) => {
         mouseX = e.clientX;
         mouseY = e.clientY;
-        
+
         if (!isMoving) {
             isMoving = true;
         }
-        
+
         clearTimeout(mouseTimeout);
         mouseTimeout = setTimeout(() => {
             isMoving = false;
         }, 100);
     });
-    
+
     // Hover effects on interactive elements
     const interactiveElements = document.querySelectorAll(
         'a, button, .magazine-btn, .gradient-btn, .service-box, .project-card, ' +
@@ -199,7 +199,7 @@ function initCustomCursor() {
         '.competency-card, .service-magazine-card, .project-magazine-card, ' +
         '.theme-toggle, #menu-icon, .footer-link, .project-link'
     );
-    
+
     interactiveElements.forEach(el => {
         el.addEventListener('mouseenter', () => {
             cursor.classList.add('hover');
@@ -208,7 +208,7 @@ function initCustomCursor() {
             cursor.classList.remove('hover');
         });
     });
-    
+
     // Text hover detection
     const textElements = document.querySelectorAll('p, h1, h2, h3, h4, span');
     textElements.forEach(el => {
@@ -221,22 +221,22 @@ function initCustomCursor() {
             cursor.classList.remove('text-hover');
         });
     });
-    
+
     // Click effects
     document.addEventListener('mousedown', () => {
         cursor.classList.add('click');
     });
-    
+
     document.addEventListener('mouseup', () => {
         cursor.classList.remove('click');
     });
-    
+
     // Hide/show on window leave/enter
     document.addEventListener('mouseleave', () => {
         cursor.style.opacity = '0';
         trails.forEach(t => t.element.style.opacity = '0');
     });
-    
+
     document.addEventListener('mouseenter', () => {
         cursor.style.opacity = '1';
     });
