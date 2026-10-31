@@ -372,3 +372,4 @@ function initCustomCursor() {
         if (bouton) { bouton.disabled = false; bouton.innerHTML = texteBouton; }
     });
 })();
+
